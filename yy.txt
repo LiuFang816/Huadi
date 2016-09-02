@@ -1,0 +1,8 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+auto eth0
+iface eth0 inet static
+address 192.168.15.222
+netmask 255.255.255.0
+gateway 192.168.15.60
+dns-nameservers 61.139.2.69 202.98.96.68
+ns-search foo.org bar.com
