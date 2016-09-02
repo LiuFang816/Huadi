@@ -1,0 +1,49 @@
+sudo apt-get install openssh-server
+根据提示输入Y
+putty或者其他SSH远程连接
+
+sudo gedit "file-path"
+
+sudo vi /etc/sudoers
+已经存在——root ALL=(ALL:ALL) ALL
+新增加——username  ALL=(ALL:ALL) ALL
+
+#解压
+tar -zxvf hadoop-2.6.4.tar.gz
+sudo mv hadoop-2.6.4 /usr/local/hadoop-2.6.4
+
+#环境变量配置
+#HADOOP VARIABLES
+export HADOOP_HOME=/usr/local/hadoop-2.6.4
+export PATH=$PATH:$HADOOP_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/sbin
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib"
+
+source 设置环境变量的文件路径
+
+#hostname, hosts
+sudo vi /etc/hostname
+sudo vi /etc/hosts
+重启
+
+#免密钥登录配置
+ssh-keygen -t rsa -P ""
+ls ~/.ssh -all
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+ssh localhost
+exit
+
+#hadoop配置
+sudo vi /usr/local/hadoop-2.6.4/etc/hadoop/hadoop-env.sh
+配置${JAVA_HOME}为jdk绝对路径，比如 /usr/local/jdk1.7.0_75
+
+#wordcount测试——单机
+mkdir /usr/local/hadoop-2.6.4/input
+cp README.txt input
+bin/hadoop jar share/hadoop/mapreduce/sources/hadoop-mapreduce-examples-2.6.4-sources.jar org.apache.hadoop.examples.WordCount input output
+cat output/*

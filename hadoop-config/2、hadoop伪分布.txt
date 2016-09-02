@@ -1,0 +1,55 @@
+#hadoop配置——伪分布
+sudo vi /usr/local/hadoop-2.6.4/etc/hadoop/core-site.xml
+<property>
+        <name>fs.default.name</name>
+        <value>hdfs://localhost:9000</value>
+</property>
+
+sudo vi /usr/local/hadoop-2.6.4/etc/hadoop/yarn-site.xml
+<property>
+        <name>yarn.nodemanager.aux-services</name>
+        <value>mapreduce_shuffle</value>
+</property>
+<property>
+        <name>yarn.nodemanager.aux-services.mapreduce.shuffle.class</name>
+        <value>org.apache.hadoop.mapred.ShuffleHandler</value>
+</property>
+
+cd /usr/local/hadoop-2.6.4/etc/hadoop
+cp mapred-site.xml.template mapred-site.xml
+sudo vi mapred-site.xml
+<property>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+</property>
+
+sudo vi hdfs-site.xml
+<property>
+       <name>dfs.replication</name>
+       <value>1</value>
+</property>
+<property>
+       <name>dfs.namenode.name.dir</name>
+       <value>file:/usr/local/hadoop-2.6.4/hdfs/name</value>
+</property>
+<property>
+       <name>dfs.datanode.data.dir</name>
+       <value>file:/usr/local/hadoop-2.6.4/hdfs/data</value>
+</property>
+
+#格式化hdfs
+hdfs namenode -format
+
+#启动——管理
+sbin/start-dfs.sh
+sbin/start-yarn.sh
+
+http://ip:50070/
+http://ip:8088/
+
+#wordcount测试——伪分布
+cd /usr/local/hadoop-2.6.4/
+bin/hadoop fs -mkdir -p input
+hadoop fs -copyFromLocal README.txt input
+hadoop jar share/hadoop/mapreduce/sources/hadoop-mapreduce-examples-2.6.4-sources.jar org.apache.hadoop.examples.WordCount input output
+hadoop fs -cat output/*

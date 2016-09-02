@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+    <!-- property>
+        <name>dfs.http.address</name>
+        <value>master:50070</value>
+    </property -->
+    <property>
+        <name>dfs.namenode.secondary.http-address</name>
+        <value>slave1:50080</value>
+    </property>
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+        <description>文件块的副本数</description>
+    </property>
+    <property>
+        <name>dfs.name.dir</name>
+        <value>/usr/local/hadoop-2.6.4/hdfs/name</value>
+        <description>namenode目录</description>
+    </property>
+    <property>
+        <name>dfs.data.dir</name>
+        <value>/usr/local/hadoop-2.6.4/hdfs/data</value>
+        <description>datanode目录</description>
+    </property>
+    <!-- property>
+        <name>dfs.webhdfs.enabled</name>
+        <value>true</value>
+    </property -->
+
+</configuration>

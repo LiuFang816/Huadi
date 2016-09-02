@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<configuration>
+
+    <property>
+        <name>hadoop.tmp.dir</name>
+        <value>/usr/local/hadoop-2.6.4/tmp</value>
+        <description>文件临时存储目录</description>
+    </property>
+    <property>
+        <name>fs.defaultFS</name>
+        <!-- 1.x name>fs.default.name</name -->
+        <value>hdfs://master:9000</value>
+        <description>hdfs namenode访问地址</description>
+    </property>
+    <property>
+         <name>io.file.buffer.size</name>
+         <value>102400</value>
+         <description>文件快大小</description>
+     </property>
+
+</configuration>
