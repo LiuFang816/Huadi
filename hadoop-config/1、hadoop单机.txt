@@ -1,4 +1,4 @@
-sudo apt-get install openssh-server
+﻿sudo apt-get install openssh-server
 根据提示输入Y
 putty或者其他SSH远程连接
 
